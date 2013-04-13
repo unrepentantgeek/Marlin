@@ -16,6 +16,7 @@ CardReader::CardReader()
    sdprinting = false;
    cardOK = false;
    saving = false;
+   logging = false;
    autostart_atmillis=0;
 
    autostart_stilltocheck=true; //the sd start is delayed, because otherwise the serial cannot answer fast enought to make contact with the hostsoftware.
@@ -90,6 +91,8 @@ void  CardReader::lsDive(const char *prepend,SdFile parent)
     {
       if (p.name[0] == DIR_NAME_FREE) break;
       if (p.name[0] == DIR_NAME_DELETED || p.name[0] == '.'|| p.name[0] == '_') continue;
+      if (longFilename[0] != '\0' &&
+          (longFilename[0] == '.' || longFilename[0] == '_')) continue;
       if ( p.name[0] == '.')
       {
         if ( p.name[1] != '.')
@@ -210,6 +213,11 @@ void CardReader::pauseSDPrint()
 }
 
 
+void CardReader::openLogFile(char* name)
+{
+  logging = true;
+  openFile(name, false);
+}
 
 void CardReader::openFile(char* name,bool read)
 {
@@ -469,6 +477,7 @@ void CardReader::closefile()
   file.sync();
   file.close();
   saving = false; 
+  logging = false;
 }
 
 void CardReader::getfilename(const uint8_t nr)
@@ -527,14 +536,15 @@ void CardReader::updir()
 
 void CardReader::printingHasFinished()
 {
- st_synchronize();
- quickStop();
- sdprinting = false;
- if(SD_FINISHED_STEPPERRELEASE)
- {
-   //finishAndDisableSteppers();
-   enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
- }
- autotempShutdown();
+    st_synchronize();
+    quickStop();
+    file.close();
+    sdprinting = false;
+    if(SD_FINISHED_STEPPERRELEASE)
+    {
+        //finishAndDisableSteppers();
+        enquecommand_P(PSTR(SD_FINISHED_RELEASECOMMAND));
+    }
+    autotempShutdown();
 }
 #endif //SDSUPPORT

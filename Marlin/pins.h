@@ -19,20 +19,17 @@
 #define X_STEP_PIN          2
 #define X_DIR_PIN           3
 #define X_ENABLE_PIN        -1
-#define X_MIN_PIN           -1
-#define X_MAX_PIN           16
+#define X_STOP_PIN          16
 
 #define Y_STEP_PIN          5
 #define Y_DIR_PIN           6
 #define Y_ENABLE_PIN       -1
-#define Y_MIN_PIN           67
-#define Y_MAX_PIN          -1
+#define Y_STOP_PIN          67
 
 #define Z_STEP_PIN          62
 #define Z_DIR_PIN           63
 #define Z_ENABLE_PIN       -1
-#define Z_MIN_PIN           59
-#define Z_MAX_PIN          -1
+#define Z_STOP_PIN          59
 
 #define E0_STEP_PIN         65
 #define E0_DIR_PIN          66
@@ -83,15 +80,13 @@
 #define X_STEP_PIN 19
 #define X_DIR_PIN 18
 #define X_ENABLE_PIN 24
-#define X_MIN_PIN 7
-#define X_MAX_PIN -1
+#define X_STOP_PIN 7
 
 //y axis pins
 #define Y_STEP_PIN 23
 #define Y_DIR_PIN 22
 #define Y_ENABLE_PIN 24
-#define Y_MIN_PIN 5
-#define Y_MAX_PIN -1
+#define Y_STOP_PIN 5
 
 //z axis pins
 #define Z_STEP_PIN 26
@@ -167,22 +162,19 @@
 #define X_STEP_PIN 29
 #define X_DIR_PIN 28
 #define X_ENABLE_PIN 25
-#define X_MIN_PIN 0
-#define X_MAX_PIN -1
+#define X_STOP_PIN 0
 
 //y axis pins
 #define Y_STEP_PIN 27
 #define Y_DIR_PIN 26
 #define Y_ENABLE_PIN 25
-#define Y_MIN_PIN 1
-#define Y_MAX_PIN -1
+#define Y_STOP_PIN 1
 
 //z axis pins
 #define Z_STEP_PIN 23
 #define Z_DIR_PIN 22
 #define Z_ENABLE_PIN 25
-#define Z_MIN_PIN 2
-#define Z_MAX_PIN -1
+#define Z_STOP_PIN 2
 
 //extruder pins
 #define E0_STEP_PIN 19
@@ -238,22 +230,19 @@
     #define X_STEP_PIN      21                  //different from stanard GEN7
     #define X_DIR_PIN       20				    //different from stanard GEN7
     #define X_ENABLE_PIN    24
-    #define X_MIN_PIN       0
-    #define X_MAX_PIN       -1
+    #define X_STOP_PIN      0
 
     //y axis pins
     #define Y_STEP_PIN      23
     #define Y_DIR_PIN       22
     #define Y_ENABLE_PIN    24
-    #define Y_MIN_PIN       1
-    #define Y_MAX_PIN       -1
+    #define Y_STOP_PIN      1
 
     //z axis pins
     #define Z_STEP_PIN      26
     #define Z_DIR_PIN       25
     #define Z_ENABLE_PIN    24
-    #define Z_MIN_PIN       2
-    #define Z_MAX_PIN       -1
+    #define Z_STOP_PIN      2
 
     //extruder pins
     #define E0_STEP_PIN      28
@@ -332,17 +321,19 @@
 
 #if MOTHERBOARD == 33 || MOTHERBOARD == 34
 
+#define LARGE_FLASH        true
+
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
 #define X_MIN_PIN           3
-#define X_MAX_PIN           2   //2 //Max endstops default to disabled "-1", set to commented value to enable.
+#define X_MAX_PIN           2
 
 #define Y_STEP_PIN         60
 #define Y_DIR_PIN          61
 #define Y_ENABLE_PIN       56
 #define Y_MIN_PIN          14
-#define Y_MAX_PIN          15   //15
+#define Y_MAX_PIN          15
 
 #define Z_STEP_PIN         46
 #define Z_DIR_PIN          48
@@ -373,7 +364,7 @@
 #endif
 #define PS_ON_PIN          12
 
-#ifdef REPRAP_DISCOUNT_SMART_CONTROLLER
+#if defined(REPRAP_DISCOUNT_SMART_CONTROLLER) || defined(G3D_PANEL)
 #define KILL_PIN           41
 #else
 #define KILL_PIN           -1
@@ -429,7 +420,11 @@
       #define BTN_EN2 35
       #define BTN_ENC 31  //the click
 
-      #define SDCARDDETECT -1  // Ramps does not use this port
+      #ifdef G3D_PANEL
+        #define SDCARDDETECT 49
+      #else
+        #define SDCARDDETECT -1  // Ramps does not use this port
+      #endif
     #endif
 
   #else //old style panel with shift register
@@ -546,20 +541,17 @@
 #define X_STEP_PIN         19
 #define X_DIR_PIN          18
 #define X_ENABLE_PIN       -1
-#define X_MIN_PIN          17
-#define X_MAX_PIN          -1
+#define X_STOP_PIN         17
 
 #define Y_STEP_PIN         10
 #define Y_DIR_PIN           7
 #define Y_ENABLE_PIN       -1
-#define Y_MIN_PIN           8
-#define Y_MAX_PIN          -1
+#define Y_STOP_PIN          8
 
 #define Z_STEP_PIN         13
 #define Z_DIR_PIN           3
 #define Z_ENABLE_PIN        2
-#define Z_MIN_PIN           4
-#define Z_MAX_PIN          -1
+#define Z_STOP_PIN          4
 
 #define E0_STEP_PIN         11
 #define E0_DIR_PIN          12
@@ -600,23 +592,20 @@
     #define X_STEP_PIN      15
     #define X_DIR_PIN       18
     #define X_ENABLE_PIN    19
-    #define X_MIN_PIN       20
-    #define X_MAX_PIN       -1
-    
+    #define X_STOP_PIN      20
+
     //y axis pins
     #define Y_STEP_PIN      23
     #define Y_DIR_PIN       22
     #define Y_ENABLE_PIN    24
-    #define Y_MIN_PIN       25
-    #define Y_MAX_PIN       -1
-    
+    #define Y_STOP_PIN      25
+
     //z axis pins
     #define Z_STEP_PIN      27
     #define Z_DIR_PIN       28
     #define Z_ENABLE_PIN    29
-    #define Z_MIN_PIN       30
-    #define Z_MAX_PIN       -1
-    
+    #define Z_STOP_PIN      30
+
     //extruder pins
     #define E0_STEP_PIN      4    //Edited @ EJE Electronics 20100715
     #define E0_DIR_PIN       2    //Edited @ EJE Electronics 20100715
@@ -657,10 +646,13 @@
 * Sanguinololu pin assignment
 *
 ****************************************************************************************/
+#if MOTHERBOARD == 64
+#define STB
+#endif
 #if MOTHERBOARD == 63
 #define MELZI
 #endif
-#if MOTHERBOARD == 62 || MOTHERBOARD == 63
+#if MOTHERBOARD == 62 || MOTHERBOARD == 63 || MOTHERBOARD == 64
 #undef MOTHERBOARD
 #define MOTHERBOARD 6
 #define SANGUINOLOLU_V_1_2 
@@ -675,33 +667,15 @@
 
 #define X_STEP_PIN         15
 #define X_DIR_PIN          21
-#if X_HOME_DIR < 0
-# define X_MIN_PIN          18 
-# define X_MAX_PIN          -1
-#else
-# define X_MIN_PIN          -1
-# define X_MAX_PIN          18
-#endif
+#define X_STOP_PIN         18
 
 #define Y_STEP_PIN         22
 #define Y_DIR_PIN          23
-#if Y_HOME_DIR < 0
-# define Y_MIN_PIN          19 
-# define Y_MAX_PIN          -1
-#else
-# define Y_MIN_PIN          -1
-# define Y_MAX_PIN          19
-#endif
+#define Y_STOP_PIN         19
 
 #define Z_STEP_PIN         3
 #define Z_DIR_PIN          2
-#if Z_HOME_DIR < 0
-# define Z_MIN_PIN          20 
-# define Z_MAX_PIN          -1
-#else
-# define Z_MIN_PIN          -1
-# define Z_MAX_PIN          20
-#endif
+#define Z_STOP_PIN         20
 
 #define E0_STEP_PIN         1
 #define E0_DIR_PIN          0
@@ -709,9 +683,16 @@
 #define LED_PIN            -1
 
 #define FAN_PIN            -1 
+#if FAN_PIN == 12 || FAN_PIN ==13
+#define FAN_SOFT_PWM
+#endif
 
 #ifdef MELZI
-#define LED_PIN            28
+#define LED_PIN            27 /* On some broken versions of the Sanguino libraries the pin definitions are wrong, which then needs LED_PIN as pin 28. But you better upgrade your Sanguino libraries! See #368. */
+#define FAN_PIN            4
+#endif
+
+#ifdef STB
 #define FAN_PIN            4
 #endif
 
@@ -747,10 +728,54 @@
 #define SDPOWER            -1
 #define SDSS               31
 
-#ifdef MELZI
-#define SDSS               24
-#endif
+/* On some broken versions of the Sanguino libraries the pin definitions are wrong, which then needs SDSS as pin 24. But you better upgrade your Sanguino libraries! See #368. */
+//#define SDSS               24
 
+ #ifdef ULTRA_LCD
+   #ifdef NEWPANEL
+     //we have no buzzer installed
+     #define BEEPER -1
+     //LCD Pins
+	 	 #ifdef DOGLCD
+			 // Pins for DOGM SPI LCD Support
+			 #define DOGLCD_A0	30
+			 #define DOGLCD_CS	29
+			 // GLCD features
+			 #define LCD_CONTRAST 1
+			 // Uncomment screen orientation
+		     // #define LCD_SCREEN_ROT_0
+		     // #define LCD_SCREEN_ROT_90
+			 #define LCD_SCREEN_ROT_180
+		     // #define LCD_SCREEN_ROT_270
+			 #else // standard Hitachi LCD controller
+			 #define LCD_PINS_RS        4
+			 #define LCD_PINS_ENABLE    17
+			 #define LCD_PINS_D4        30
+			 #define LCD_PINS_D5        29
+			 #define LCD_PINS_D6        28
+			 #define LCD_PINS_D7        27
+         #endif
+     //The encoder and click button
+     #define BTN_EN1 11  //must be a hardware interrupt pin
+     #define BTN_EN2 10 //must be hardware interrupt pin
+     #define BTN_ENC 16  //the switch
+     //not connected to a pin
+     #define SDCARDDETECT -1
+     
+     //from the same bit in the RAMPS Newpanel define
+     //encoder rotation values
+     #define encrot0 0
+     #define encrot1 2
+     #define encrot2 3
+     #define encrot3 1
+     
+     #define BLEN_C 2
+     #define BLEN_B 1
+     #define BLEN_A 0
+     
+   #endif //Newpanel
+ #endif //Ultipanel
+ 
 #endif
 
 
@@ -765,6 +790,8 @@
  #error Oops!  Make sure you have 'Arduino Mega' selected from the 'Tools -> Boards' menu.
  #endif
 #endif
+
+#define LARGE_FLASH true
 
 #define X_STEP_PIN 25
 #define X_DIR_PIN 23
@@ -901,6 +928,8 @@
  #endif
 #endif
 
+#define LARGE_FLASH true
+
 #define X_STEP_PIN 25
 #define X_DIR_PIN 23
 #define X_MIN_PIN 15
@@ -956,6 +985,93 @@
 
 #endif
 
+
+/****************************************************************************************
+* RUMBA pin assignment
+*
+****************************************************************************************/
+#if MOTHERBOARD == 80
+#define KNOWN_BOARD 1
+
+#ifndef __AVR_ATmega2560__
+ #error Oops!  Make sure you have 'Arduino Mega' selected from the 'Tools -> Boards' menu.
+#endif
+
+#define X_STEP_PIN         17
+#define X_DIR_PIN          16
+#define X_ENABLE_PIN       48
+#define X_MIN_PIN          37
+#define X_MAX_PIN          36 
+
+#define Y_STEP_PIN         54
+#define Y_DIR_PIN          47 
+#define Y_ENABLE_PIN       55
+#define Y_MIN_PIN          35
+#define Y_MAX_PIN          34 
+
+#define Z_STEP_PIN         57 
+#define Z_DIR_PIN          56
+#define Z_ENABLE_PIN       62 
+#define Z_MIN_PIN          33
+#define Z_MAX_PIN          32
+
+#define E0_STEP_PIN        23
+#define E0_DIR_PIN         22
+#define E0_ENABLE_PIN      24
+
+#define E1_STEP_PIN        26
+#define E1_DIR_PIN         25
+#define E1_ENABLE_PIN      27
+
+#define E2_STEP_PIN        29
+#define E2_DIR_PIN         28
+#define E2_ENABLE_PIN      39
+
+#define LED_PIN            13
+
+#define FAN_PIN            7 
+//additional FAN1 PIN (e.g. useful for electronics fan or light on/off) on PIN 8
+
+#define PS_ON_PIN          45
+#define KILL_PIN           46
+
+#define HEATER_0_PIN       2    // EXTRUDER 1
+#define HEATER_1_PIN       3    // EXTRUDER 2
+#define HEATER_2_PIN       6    // EXTRUDER 3
+//optional FAN1 can be used as 4th heater output: #define HEATER_3_PIN       8    // EXTRUDER 4
+#define HEATER_BED_PIN     9    // BED
+
+#define TEMP_0_PIN         15   // ANALOG NUMBERING
+#define TEMP_1_PIN         14   // ANALOG NUMBERING
+#define TEMP_2_PIN         13   // ANALOG NUMBERING
+//optional for extruder 4 or chamber: #define TEMP_2_PIN         12   // ANALOG NUMBERING
+#define TEMP_BED_PIN       11   // ANALOG NUMBERING
+
+#define SDPOWER            -1
+#define SDSS               53
+#define SDCARDDETECT       49
+#define BEEPER             44
+#define LCD_PINS_RS        19 
+#define LCD_PINS_ENABLE    42
+#define LCD_PINS_D4        18
+#define LCD_PINS_D5        38 
+#define LCD_PINS_D6        41
+#define LCD_PINS_D7        40
+#define BTN_EN1            11
+#define BTN_EN2            12
+#define BTN_ENC            43
+//encoder rotation values
+#define BLEN_C 2
+#define BLEN_B 1
+#define BLEN_A 0
+#define encrot0 0
+#define encrot1 2
+#define encrot2 3
+#define encrot3 1
+
+#endif //MOTHERBOARD==80
+
+
 /****************************************************************************************
 * Teensylu 0.7 / Printrboard pin assignments (AT90USB1286)
 * Requires the Teensyduino software with Teensy++ 2.0 selected in Arduino IDE!
@@ -970,20 +1086,19 @@
 #error Oops!  Make sure you have 'Teensy++ 2.0' selected from the 'Tools -> Boards' menu.
 #endif
 
+#define LARGE_FLASH        true
+
 #define X_STEP_PIN          0
 #define X_DIR_PIN           1
 #define X_ENABLE_PIN       39
-#define X_MAX_PIN          -1
 
 #define Y_STEP_PIN          2
 #define Y_DIR_PIN           3
 #define Y_ENABLE_PIN       38
-#define Y_MAX_PIN          -1
 
 #define Z_STEP_PIN          4
 #define Z_DIR_PIN           5
 #define Z_ENABLE_PIN       23
-#define Z_MAX_PIN          -1
 
 #define E0_STEP_PIN         6
 #define E0_DIR_PIN          7
@@ -998,15 +1113,15 @@
 // for the fan and Teensyduino uses a different pin mapping.
 
 #if MOTHERBOARD == 8  // Teensylu
-  #define X_MIN_PIN          13
-  #define Y_MIN_PIN          14
-  #define Z_MIN_PIN          15
+  #define X_STOP_PIN         13
+  #define Y_STOP_PIN         14
+  #define Z_STOP_PIN         15
   #define TEMP_0_PIN          7  // Extruder / Analog pin numbering
   #define TEMP_BED_PIN        6  // Bed / Analog pin numbering
 #else  // Printrboard
-  #define X_MIN_PIN          35
-  #define Y_MIN_PIN           8
-  #define Z_MIN_PIN          36
+  #define X_STOP_PIN         35
+  #define Y_STOP_PIN          8
+  #define Z_STOP_PIN         36
   #define TEMP_0_PIN          1  // Extruder / Analog pin numbering
   #define TEMP_BED_PIN        0  // Bed / Analog pin numbering
 #endif
@@ -1046,22 +1161,19 @@
 #define X_STEP_PIN         27
 #define X_DIR_PIN          29
 #define X_ENABLE_PIN       28
-#define X_MIN_PIN           7
-#define X_MAX_PIN          -1
+#define X_STOP_PIN          7
 #define X_ATT_PIN          26
 
 #define Y_STEP_PIN         31
 #define Y_DIR_PIN          33
 #define Y_ENABLE_PIN       32
-#define Y_MIN_PIN           6
-#define Y_MAX_PIN          -1
+#define Y_STOP_PIN          6
 #define Y_ATT_PIN          30
 
 #define Z_STEP_PIN         17
 #define Z_DIR_PIN          19
 #define Z_ENABLE_PIN       18
-#define Z_MIN_PIN           5
-#define Z_MAX_PIN          -1
+#define Z_STOP_PIN          5
 #define Z_ATT_PIN          16
 
 #define E0_STEP_PIN        21
@@ -1111,18 +1223,15 @@
 
 #define X_STEP_PIN         15
 #define X_DIR_PIN          18
-#define X_MIN_PIN          20
-#define X_MAX_PIN           -1
+#define X_STOP_PIN         20
 
 #define Y_STEP_PIN         23
 #define Y_DIR_PIN          22
-#define Y_MIN_PIN          25
-#define Y_MAX_PIN          -1
+#define Y_STOP_PIN         25
 
 #define Z_STEP_PIN         27
 #define Z_DIR_PIN          28
-#define Z_MIN_PIN          30
-#define Z_MAX_PIN          -1
+#define Z_STOP_PIN         30
 
 #define E_STEP_PIN         17
 #define E_DIR_PIN          21
@@ -1192,20 +1301,17 @@
 #define X_STEP_PIN         21
 #define X_DIR_PIN          20
 #define X_ENABLE_PIN       24
-#define X_MIN_PIN          0
-#define X_MAX_PIN          -1
+#define X_STOP_PIN         0
 
 #define Y_STEP_PIN         23
 #define Y_DIR_PIN          22
 #define Y_ENABLE_PIN       24
-#define Y_MIN_PIN          1
-#define Y_MAX_PIN          -1
+#define Y_STOP_PIN         1
 
 #define Z_STEP_PIN         26
 #define Z_DIR_PIN          25
 #define Z_ENABLE_PIN       24
-#define Z_MIN_PIN          2
-#define Z_MAX_PIN          -1
+#define Z_STOP_PIN         2
 
 #define E0_STEP_PIN         28
 #define E0_DIR_PIN          27
@@ -1249,20 +1355,17 @@
 #define X_STEP_PIN         26
 #define X_DIR_PIN          25
 #define X_ENABLE_PIN       10
-#define X_MIN_PIN          0
-#define X_MAX_PIN          -1
+#define X_STOP_PIN         0
 
 #define Y_STEP_PIN         28
 #define Y_DIR_PIN          27
 #define Y_ENABLE_PIN       10
-#define Y_MIN_PIN          1
-#define Y_MAX_PIN          -1
+#define Y_STOP_PIN         1
 
 #define Z_STEP_PIN         23
 #define Z_DIR_PIN          22
 #define Z_ENABLE_PIN       10
-#define Z_MIN_PIN          2
-#define Z_MAX_PIN          -1
+#define Z_STOP_PIN         2
 
 #define E0_STEP_PIN         24
 #define E0_DIR_PIN          21
@@ -1317,6 +1420,8 @@
 #ifndef __AVR_ATmega2560__
 #error Oops!  Make sure you have 'Arduino Mega 2560' selected from the 'Tools -> Boards' menu.
 #endif
+
+#define LARGE_FLASH true
 
 #define X_STEP_PIN 37
 #define X_DIR_PIN 48
@@ -1393,19 +1498,19 @@
  #endif
 
 
-
+#define LARGE_FLASH        true
 
 #define X_STEP_PIN         26
 #define X_DIR_PIN          28
 #define X_ENABLE_PIN       24
 #define X_MIN_PIN          41
-#define X_MAX_PIN          37   //2 //Max endstops default to disabled "-1", set to commented value to enable.
+#define X_MAX_PIN          37
 
 #define Y_STEP_PIN         60 // A6
 #define Y_DIR_PIN          61 // A7
 #define Y_ENABLE_PIN       22
 #define Y_MIN_PIN          14
-#define Y_MAX_PIN          15   //15
+#define Y_MAX_PIN          15
 
 #define Z_STEP_PIN         54 // A0
 #define Z_DIR_PIN          55 // A1
@@ -1499,14 +1604,44 @@
   #define _E2_PINS
 #endif
 
+#ifdef X_STOP_PIN
+  #if X_HOME_DIR < 0
+    #define X_MIN_PIN X_STOP_PIN
+    #define X_MAX_PIN -1
+  #else
+    #define X_MIN_PIN -1
+    #define X_MAX_PIN X_STOP_PIN
+  #endif
+#endif
+
+#ifdef Y_STOP_PIN
+  #if Y_HOME_DIR < 0
+    #define Y_MIN_PIN Y_STOP_PIN
+    #define Y_MAX_PIN -1
+  #else
+    #define Y_MIN_PIN -1
+    #define Y_MAX_PIN Y_STOP_PIN
+  #endif
+#endif
+
+#ifdef Z_STOP_PIN
+  #if Z_HOME_DIR < 0
+    #define Z_MIN_PIN Z_STOP_PIN
+    #define Z_MAX_PIN -1
+  #else
+    #define Z_MIN_PIN -1
+    #define Z_MAX_PIN Z_STOP_PIN
+  #endif
+#endif
+
 #ifdef DISABLE_MAX_ENDSTOPS
 #define X_MAX_PIN          -1
 #define Y_MAX_PIN          -1
 #define Z_MAX_PIN          -1
 #endif
 
-#define SENSITIVE_PINS {0, 1, X_STEP_PIN, X_DIR_PIN, X_ENABLE_PIN, X_MIN_PIN, X_MAX_PIN, Y_STEP_PIN, Y_DIR_PIN, Y_ENABLE_PIN, Y_MIN_PIN, Y_MAX_PIN, Z_STEP_PIN, Z_DIR_PIN, Z_ENABLE_PIN, Z_MIN_PIN, Z_MAX_PIN, LED_PIN, PS_ON_PIN, \
+#define SENSITIVE_PINS {0, 1, X_STEP_PIN, X_DIR_PIN, X_ENABLE_PIN, X_MIN_PIN, X_MAX_PIN, Y_STEP_PIN, Y_DIR_PIN, Y_ENABLE_PIN, Y_MIN_PIN, Y_MAX_PIN, Z_STEP_PIN, Z_DIR_PIN, Z_ENABLE_PIN, Z_MIN_PIN, Z_MAX_PIN, PS_ON_PIN, \
                         HEATER_BED_PIN, FAN_PIN,                  \
                         _E0_PINS _E1_PINS _E2_PINS             \
-                        TEMP_0_PIN, TEMP_1_PIN, TEMP_2_PIN, TEMP_BED_PIN }
+                        analogInputToDigitalPin(TEMP_0_PIN), analogInputToDigitalPin(TEMP_1_PIN), analogInputToDigitalPin(TEMP_2_PIN), analogInputToDigitalPin(TEMP_BED_PIN) }
 #endif

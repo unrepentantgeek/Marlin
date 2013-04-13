@@ -125,13 +125,13 @@ MCU              ?= atmega1280
 
 #Teensylu
 else ifeq  ($(HARDWARE_MOTHERBOARD),8)
-HARDWARE_VARIANT ?= Teensyduino
+HARDWARE_VARIANT ?= Teensy
 MCU              ?= at90usb1286
 else ifeq  ($(HARDWARE_MOTHERBOARD),81)
-HARDWARE_VARIANT ?= Teensyduino
+HARDWARE_VARIANT ?= Teensy
 MCU              ?= at90usb1286
 else ifeq  ($(HARDWARE_MOTHERBOARD),82)
-HARDWARE_VARIANT ?= Teensyduino
+HARDWARE_VARIANT ?= Teensy
 MCU              ?= at90usb646
 
 #Gen3+
@@ -171,10 +171,15 @@ F_CPU ?= 16000000
 # that derives from that, and their source are present in
 # the main Marlin source directory
 ifeq ($(HARDWARE_VARIANT), arduino)
-HARDWARE_SRC = $(ARDUINO_INSTALL_DIR)/hardware/arduino/cores/arduino
+HARDWARE_DIR = $(ARDUINO_INSTALL_DIR)/hardware
 else
-HARDWARE_SRC = $(HARDWARE_VARIANT)/cores/arduino
+ifeq ($(shell [ $(ARDUINO_VERSION) -ge 100 ] && echo true), true)
+HARDWARE_DIR = ../ArduinoAddons/Arduino_1.x.x
+else
+HARDWARE_DIR = ../ArduinoAddons/Arduino_0.xx
 endif
+endif
+HARDWARE_SRC = $(HARDWARE_DIR)/$(HARDWARE_VARIANT)/cores/arduino
 
 TARGET = $(notdir $(CURDIR))
 
@@ -185,11 +190,19 @@ TARGET = $(notdir $(CURDIR))
 VPATH = .
 VPATH += $(BUILD_DIR)
 VPATH += $(HARDWARE_SRC)
+ifeq ($(HARDWARE_VARIANT), arduino)
 VPATH += $(ARDUINO_INSTALL_DIR)/libraries/LiquidCrystal
 VPATH += $(ARDUINO_INSTALL_DIR)/libraries/SPI
+else
+VPATH += $(HARDWARE_DIR)/libraries/LiquidCrystal
+VPATH += $(HARDWARE_DIR)/libraries/SPI
+endif
 ifeq ($(HARDWARE_VARIANT), arduino)
 HARDWARE_SUB_VARIANT ?= mega
 VPATH += $(ARDUINO_INSTALL_DIR)/hardware/arduino/variants/$(HARDWARE_SUB_VARIANT)
+else
+HARDWARE_SUB_VARIANT ?= standard
+VPATH += $(HARDWARE_DIR)/$(HARDWARE_VARIANT)/variants/$(HARDWARE_SUB_VARIANT)
 endif
 SRC = wiring.c \
 	wiring_analog.c wiring_digital.c \
@@ -223,9 +236,27 @@ OPT = s
 
 DEFINES ?=
 
+# Program settings
+CC = $(AVR_TOOLS_PATH)avr-gcc
+CXX = $(AVR_TOOLS_PATH)avr-g++
+OBJCOPY = $(AVR_TOOLS_PATH)avr-objcopy
+OBJDUMP = $(AVR_TOOLS_PATH)avr-objdump
+AR  = $(AVR_TOOLS_PATH)avr-ar
+SIZE = $(AVR_TOOLS_PATH)avr-size
+NM = $(AVR_TOOLS_PATH)avr-nm
+AVRDUDE = avrdude
+REMOVE = rm -f
+MV = mv -f
+
 # Place -D or -U options here
-CDEFS = -DF_CPU=$(F_CPU) ${addprefix -D , $(DEFINES)}
-CXXDEFS = -DF_CPU=$(F_CPU) ${addprefix -D , $(DEFINES)}
+CDEFS    = -DF_CPU=$(F_CPU) ${addprefix -D , $(DEFINES)}
+CXXDEFS  = $(CDEFS)
+
+ifeq ($(HARDWARE_VARIANT), Teensy)
+CDEFS  += -DUSB_SERIAL
+SRC    += usb.c pins_teensy.c
+CXXSRC += usb_api.cpp
+endif
 
 # Add all the source directories as include directories too
 CINCS = ${addprefix -I ,${VPATH}}
@@ -247,9 +278,9 @@ CTUNING += -DMOTHERBOARD=${HARDWARE_MOTHERBOARD}
 endif
 #CEXTRA = -Wa,-adhlns=$(<:.c=.lst)
 
-CFLAGS = $(CDEBUG) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CEXTRA) $(CTUNING)
-CXXFLAGS =         $(CDEFS) $(CINCS) -O$(OPT) -Wall    $(CEXTRA) $(CTUNING)
-#ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs 
+CFLAGS := $(CDEBUG) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CEXTRA) $(CTUNING)
+CXXFLAGS :=         $(CDEFS) $(CINCS) -O$(OPT) -Wall    $(CEXTRA) $(CTUNING)
+#ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs
 LDFLAGS = -lm
 
 
@@ -259,18 +290,6 @@ AVRDUDE_WRITE_FLASH = -U flash:w:$(BUILD_DIR)/$(TARGET).hex:i
 AVRDUDE_FLAGS = -D -C $(ARDUINO_INSTALL_DIR)/hardware/tools/avrdude.conf \
 	-p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) \
 	-b $(UPLOAD_RATE)
-
-# Program settings
-CC = $(AVR_TOOLS_PATH)avr-gcc
-CXX = $(AVR_TOOLS_PATH)avr-g++
-OBJCOPY = $(AVR_TOOLS_PATH)avr-objcopy
-OBJDUMP = $(AVR_TOOLS_PATH)avr-objdump
-AR  = $(AVR_TOOLS_PATH)avr-ar
-SIZE = $(AVR_TOOLS_PATH)avr-size
-NM = $(AVR_TOOLS_PATH)avr-nm
-AVRDUDE = avrdude
-REMOVE = rm -f
-MV = mv -f
 
 # Define all object files.
 OBJ = ${patsubst %.c, $(BUILD_DIR)/%.o, ${SRC}}

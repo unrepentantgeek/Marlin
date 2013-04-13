@@ -17,6 +17,7 @@ public:
 
   void checkautostart(bool x); 
   void openFile(char* name,bool read);
+  void openLogFile(char* name);
   void removeFile(char* name);
   void closefile();
   void release();
@@ -35,14 +36,16 @@ public:
   void setroot();
 
 
+  FORCE_INLINE bool isFileOpen() { return file.isOpen(); }
   FORCE_INLINE bool eof() { return sdpos>=filesize ;};
   FORCE_INLINE int16_t get() {  sdpos = file.curPosition();return (int16_t)file.read();};
   FORCE_INLINE void setIndex(long index) {sdpos = index;file.seekSet(index);};
-  FORCE_INLINE uint8_t percentDone(){if(!sdprinting) return 0; if(filesize) return sdpos/((filesize+99)/100); else return 0;};
+  FORCE_INLINE uint8_t percentDone(){if(!isFileOpen()) return 0; if(filesize) return sdpos/((filesize+99)/100); else return 0;};
   FORCE_INLINE char* getWorkDirName(){workDir.getFilename(filename);return filename;};
 
 public:
   bool saving;
+  bool logging;
   bool sdprinting ;  
   bool cardOK ;
   char filename[13];

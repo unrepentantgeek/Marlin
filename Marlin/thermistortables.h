@@ -248,72 +248,171 @@ const short temptable_6[][2] PROGMEM = {
    {970*OVERSAMPLENR, 25},
    {978*OVERSAMPLENR, 22},
    {1008*OVERSAMPLENR, 3},
-   {1023*OVERSAMPLENR, 0}  //to allow internal 0°C
+   {1023*OVERSAMPLENR, 0}  //to allow internal 0 degrees C
 };
 #endif
 
 #if (THERMISTORHEATER_0 == 7) || (THERMISTORHEATER_1 == 7) || (THERMISTORHEATER_2 == 7) || (THERMISTORBED == 7) // 100k Honeywell 135-104LAG-J01
 const short temptable_7[][2] PROGMEM = {
-   {1*OVERSAMPLENR, 500},
-   {46*OVERSAMPLENR, 270}, //top rating 300C
-   {50*OVERSAMPLENR, 265},
-   {54*OVERSAMPLENR, 260},
-   {58*OVERSAMPLENR, 255},
-   {62*OVERSAMPLENR, 250},
-   {67*OVERSAMPLENR, 245},
-   {72*OVERSAMPLENR, 240},
-   {79*OVERSAMPLENR, 235},
-   {85*OVERSAMPLENR, 230},
-   {91*OVERSAMPLENR, 225},
-   {99*OVERSAMPLENR, 220},
-   {107*OVERSAMPLENR, 215},
-   {116*OVERSAMPLENR, 210},
-   {126*OVERSAMPLENR, 205},
-   {136*OVERSAMPLENR, 200},
-   {149*OVERSAMPLENR, 195},
-   {160*OVERSAMPLENR, 190},
-   {175*OVERSAMPLENR, 185},
-   {191*OVERSAMPLENR, 180},
-   {209*OVERSAMPLENR, 175},
-   {224*OVERSAMPLENR, 170},
-   {246*OVERSAMPLENR, 165},
-   {267*OVERSAMPLENR, 160},
-   {293*OVERSAMPLENR, 155},
-   {316*OVERSAMPLENR, 150},
-   {340*OVERSAMPLENR, 145},
-   {364*OVERSAMPLENR, 140},
-   {396*OVERSAMPLENR, 135},
-   {425*OVERSAMPLENR, 130},
-   {460*OVERSAMPLENR, 125},
-   {489*OVERSAMPLENR, 120},
-   {526*OVERSAMPLENR, 115},
-   {558*OVERSAMPLENR, 110},
-   {591*OVERSAMPLENR, 105},
-   {628*OVERSAMPLENR, 100},
-   {660*OVERSAMPLENR, 95},
-   {696*OVERSAMPLENR, 90},
-   {733*OVERSAMPLENR, 85},
-   {761*OVERSAMPLENR, 80},
-   {794*OVERSAMPLENR, 75},
-   {819*OVERSAMPLENR, 70},
-   {847*OVERSAMPLENR, 65},
-   {870*OVERSAMPLENR, 60},
-   {892*OVERSAMPLENR, 55},
-   {911*OVERSAMPLENR, 50},
-   {929*OVERSAMPLENR, 45},
-   {944*OVERSAMPLENR, 40},
-   {959*OVERSAMPLENR, 35},
-   {971*OVERSAMPLENR, 30},
-   {981*OVERSAMPLENR, 25},
-   {989*OVERSAMPLENR, 20},
-   {994*OVERSAMPLENR, 15},
-   {1001*OVERSAMPLENR, 10},
+   {1*OVERSAMPLENR, 941},
+   {19*OVERSAMPLENR, 362},
+   {37*OVERSAMPLENR, 299}, //top rating 300C
+   {55*OVERSAMPLENR, 266},
+   {73*OVERSAMPLENR, 245},
+   {91*OVERSAMPLENR, 229},
+   {109*OVERSAMPLENR, 216},
+   {127*OVERSAMPLENR, 206},
+   {145*OVERSAMPLENR, 197},
+   {163*OVERSAMPLENR, 190},
+   {181*OVERSAMPLENR, 183},
+   {199*OVERSAMPLENR, 177},
+   {217*OVERSAMPLENR, 171},
+   {235*OVERSAMPLENR, 166},
+   {253*OVERSAMPLENR, 162},
+   {271*OVERSAMPLENR, 157},
+   {289*OVERSAMPLENR, 153},
+   {307*OVERSAMPLENR, 149},
+   {325*OVERSAMPLENR, 146},
+   {343*OVERSAMPLENR, 142},
+   {361*OVERSAMPLENR, 139},
+   {379*OVERSAMPLENR, 135},
+   {397*OVERSAMPLENR, 132},
+   {415*OVERSAMPLENR, 129},
+   {433*OVERSAMPLENR, 126},
+   {451*OVERSAMPLENR, 123},
+   {469*OVERSAMPLENR, 121},
+   {487*OVERSAMPLENR, 118},
+   {505*OVERSAMPLENR, 115},
+   {523*OVERSAMPLENR, 112},
+   {541*OVERSAMPLENR, 110},
+   {559*OVERSAMPLENR, 107},
+   {577*OVERSAMPLENR, 105},
+   {595*OVERSAMPLENR, 102},
+   {613*OVERSAMPLENR, 99},
+   {631*OVERSAMPLENR, 97},
+   {649*OVERSAMPLENR, 94},
+   {667*OVERSAMPLENR, 92},
+   {685*OVERSAMPLENR, 89},
+   {703*OVERSAMPLENR, 86},
+   {721*OVERSAMPLENR, 84},
+   {739*OVERSAMPLENR, 81},
+   {757*OVERSAMPLENR, 78},
+   {775*OVERSAMPLENR, 75},
+   {793*OVERSAMPLENR, 72},
+   {811*OVERSAMPLENR, 69},
+   {829*OVERSAMPLENR, 66},
+   {847*OVERSAMPLENR, 62},
+   {865*OVERSAMPLENR, 59},
+   {883*OVERSAMPLENR, 55},
+   {901*OVERSAMPLENR, 51},
+   {919*OVERSAMPLENR, 46},
+   {937*OVERSAMPLENR, 41},
+   {955*OVERSAMPLENR, 35},
+   {973*OVERSAMPLENR, 27},
+   {991*OVERSAMPLENR, 17},
+   {1009*OVERSAMPLENR, 1},
+   {1023*OVERSAMPLENR, 0}  //to allow internal 0 degrees C
+};
+#endif
+#if (THERMISTORHEATER_0 == 8) || (THERMISTORHEATER_1 == 8) || (THERMISTORHEATER_2 == 8) || (THERMISTORBED == 8)
+// 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup)
+const short temptable_8[][2] PROGMEM = {
+   {1*OVERSAMPLENR, 704},
+   {54*OVERSAMPLENR, 216},
+   {107*OVERSAMPLENR, 175},
+   {160*OVERSAMPLENR, 152},
+   {213*OVERSAMPLENR, 137},
+   {266*OVERSAMPLENR, 125},
+   {319*OVERSAMPLENR, 115},
+   {372*OVERSAMPLENR, 106},
+   {425*OVERSAMPLENR, 99},
+   {478*OVERSAMPLENR, 91},
+   {531*OVERSAMPLENR, 85},
+   {584*OVERSAMPLENR, 78},
+   {637*OVERSAMPLENR, 71},
+   {690*OVERSAMPLENR, 65},
+   {743*OVERSAMPLENR, 58},
+   {796*OVERSAMPLENR, 50},
+   {849*OVERSAMPLENR, 42},
+   {902*OVERSAMPLENR, 31},
+   {955*OVERSAMPLENR, 17},
+   {1008*OVERSAMPLENR, 0}
+};
+#endif
+#if (THERMISTORHEATER_0 == 9) || (THERMISTORHEATER_1 == 9) || (THERMISTORHEATER_2 == 9) || (THERMISTORBED == 9)
+// 100k GE Sensing AL03006-58.2K-97-G1 (4.7k pullup)
+const short temptable_9[][2] PROGMEM = {
+	{1*OVERSAMPLENR, 936},
+	{36*OVERSAMPLENR, 300},
+	{71*OVERSAMPLENR, 246},
+	{106*OVERSAMPLENR, 218},
+	{141*OVERSAMPLENR, 199},
+	{176*OVERSAMPLENR, 185},
+	{211*OVERSAMPLENR, 173},
+	{246*OVERSAMPLENR, 163},
+	{281*OVERSAMPLENR, 155},
+	{316*OVERSAMPLENR, 147},
+	{351*OVERSAMPLENR, 140},
+	{386*OVERSAMPLENR, 134},
+	{421*OVERSAMPLENR, 128},
+	{456*OVERSAMPLENR, 122},
+	{491*OVERSAMPLENR, 117},
+	{526*OVERSAMPLENR, 112},
+	{561*OVERSAMPLENR, 107},
+	{596*OVERSAMPLENR, 102},
+	{631*OVERSAMPLENR, 97},
+	{666*OVERSAMPLENR, 92},
+	{701*OVERSAMPLENR, 87},
+	{736*OVERSAMPLENR, 81},
+	{771*OVERSAMPLENR, 76},
+	{806*OVERSAMPLENR, 70},
+	{841*OVERSAMPLENR, 63},
+	{876*OVERSAMPLENR, 56},
+	{911*OVERSAMPLENR, 48},
+	{946*OVERSAMPLENR, 38},
+	{981*OVERSAMPLENR, 23},
+	{1005*OVERSAMPLENR, 5},
+	{1016*OVERSAMPLENR, 0}
+};
+#endif
+#if (THERMISTORHEATER_0 == 10) || (THERMISTORHEATER_1 == 10) || (THERMISTORHEATER_2 == 10) || (THERMISTORBED == 10)
+// 100k RS thermistor 198-961 (4.7k pullup)
+const short temptable_10[][2] PROGMEM = {
+   {1*OVERSAMPLENR, 929},
+   {36*OVERSAMPLENR, 299},
+   {71*OVERSAMPLENR, 246},
+   {106*OVERSAMPLENR, 217},
+   {141*OVERSAMPLENR, 198},
+   {176*OVERSAMPLENR, 184},
+   {211*OVERSAMPLENR, 173},
+   {246*OVERSAMPLENR, 163},
+   {281*OVERSAMPLENR, 154},
+   {316*OVERSAMPLENR, 147},
+   {351*OVERSAMPLENR, 140},
+   {386*OVERSAMPLENR, 134},
+   {421*OVERSAMPLENR, 128},
+   {456*OVERSAMPLENR, 122},
+   {491*OVERSAMPLENR, 117},
+   {526*OVERSAMPLENR, 112},
+   {561*OVERSAMPLENR, 107},
+   {596*OVERSAMPLENR, 102},
+   {631*OVERSAMPLENR, 97},
+   {666*OVERSAMPLENR, 91},
+   {701*OVERSAMPLENR, 86},
+   {736*OVERSAMPLENR, 81},
+   {771*OVERSAMPLENR, 76},
+   {806*OVERSAMPLENR, 70},
+   {841*OVERSAMPLENR, 63},
+   {876*OVERSAMPLENR, 56},
+   {911*OVERSAMPLENR, 48},
+   {946*OVERSAMPLENR, 38},
+   {981*OVERSAMPLENR, 23},
    {1005*OVERSAMPLENR, 5},
-   {1023*OVERSAMPLENR, 0}  //to allow internal 0°C
+   {1016*OVERSAMPLENR, 0}
 };
 #endif
 
-#if (THERMISTORHEATER_0 == 51) || (THERMISTORHEATER_1 == 51) || (THERMISTORHEATER_2 == 51) || (THERMISTORBED == 51) 
+#if (THERMISTORHEATER_0 == 51) || (THERMISTORHEATER_1 == 51) || (THERMISTORHEATER_2 == 51) || (THERMISTORBED == 51)
 // 100k EPCOS (WITH 1kohm RESISTOR FOR PULLUP, R9 ON SANGUINOLOLU! NOT FOR 4.7kohm PULLUP! THIS IS NOT NORMAL!)
 // Verified by linagee.
 // Calculated using 1kohm pullup, voltage divider math, and manufacturer provided temp/resistance
@@ -457,53 +556,174 @@ const short temptable_55[][2] PROGMEM = {
 };
 #endif
 
+#if (THERMISTORHEATER_0 == 60) || (THERMISTORHEATER_1 == 60) || (THERMISTORHEATER_2 == 60) || (THERMISTORBED == 60) // Maker's Tool Works Kapton Bed Thermister
+const short temptable_60[][2] PROGMEM = {
+   {51*OVERSAMPLENR, 272},
+   {61*OVERSAMPLENR, 258},
+   {71*OVERSAMPLENR, 247},
+   {81*OVERSAMPLENR, 237},
+   {91*OVERSAMPLENR, 229},
+   {101*OVERSAMPLENR, 221},
+   {131*OVERSAMPLENR, 204},
+   {161*OVERSAMPLENR, 190},
+   {191*OVERSAMPLENR, 179},
+   {231*OVERSAMPLENR, 167},
+   {271*OVERSAMPLENR, 157},
+   {311*OVERSAMPLENR, 148},
+   {351*OVERSAMPLENR, 140},
+   {381*OVERSAMPLENR, 135},
+   {411*OVERSAMPLENR, 130},
+   {441*OVERSAMPLENR, 125},
+   {451*OVERSAMPLENR, 123},
+   {461*OVERSAMPLENR, 122},
+   {471*OVERSAMPLENR, 120},
+   {481*OVERSAMPLENR, 119},
+   {491*OVERSAMPLENR, 117},
+   {501*OVERSAMPLENR, 116},
+   {511*OVERSAMPLENR, 114},
+   {521*OVERSAMPLENR, 113},
+   {531*OVERSAMPLENR, 111},
+   {541*OVERSAMPLENR, 110},
+   {551*OVERSAMPLENR, 108},
+   {561*OVERSAMPLENR, 107},
+   {571*OVERSAMPLENR, 105},
+   {581*OVERSAMPLENR, 104},
+   {591*OVERSAMPLENR, 102},
+   {601*OVERSAMPLENR, 101},
+   {611*OVERSAMPLENR, 100},
+   {621*OVERSAMPLENR, 98},
+   {631*OVERSAMPLENR, 97},
+   {641*OVERSAMPLENR, 95},
+   {651*OVERSAMPLENR, 94},
+   {661*OVERSAMPLENR, 92},
+   {671*OVERSAMPLENR, 91},
+   {681*OVERSAMPLENR, 90},
+   {691*OVERSAMPLENR, 88},
+   {701*OVERSAMPLENR, 87},
+   {711*OVERSAMPLENR, 85},
+   {721*OVERSAMPLENR, 84},
+   {731*OVERSAMPLENR, 82},
+   {741*OVERSAMPLENR, 81},
+   {751*OVERSAMPLENR, 79},
+   {761*OVERSAMPLENR, 77},
+   {771*OVERSAMPLENR, 76},
+   {781*OVERSAMPLENR, 74},
+   {791*OVERSAMPLENR, 72},
+   {801*OVERSAMPLENR, 71},
+   {811*OVERSAMPLENR, 69},
+   {821*OVERSAMPLENR, 67},
+   {831*OVERSAMPLENR, 65},
+   {841*OVERSAMPLENR, 63},
+   {851*OVERSAMPLENR, 62},
+   {861*OVERSAMPLENR, 60},
+   {871*OVERSAMPLENR, 57},
+   {881*OVERSAMPLENR, 55},
+   {891*OVERSAMPLENR, 53},
+   {901*OVERSAMPLENR, 51},
+   {911*OVERSAMPLENR, 48},
+   {921*OVERSAMPLENR, 45},
+   {931*OVERSAMPLENR, 42},
+   {941*OVERSAMPLENR, 39},
+   {951*OVERSAMPLENR, 36},
+   {961*OVERSAMPLENR, 32},
+   {981*OVERSAMPLENR, 23},
+   {991*OVERSAMPLENR, 17},
+   {1001*OVERSAMPLENR, 9},
+   {1008*OVERSAMPLENR, 0},
+};
+#endif
+
+
 #define _TT_NAME(_N) temptable_ ## _N
 #define TT_NAME(_N) _TT_NAME(_N)
 
 #ifdef THERMISTORHEATER_0
-  #define heater_0_temptable TT_NAME(THERMISTORHEATER_0)
-  #define heater_0_temptable_len (sizeof(heater_0_temptable)/sizeof(*heater_0_temptable))
+# define HEATER_0_TEMPTABLE TT_NAME(THERMISTORHEATER_0)
+# define HEATER_0_TEMPTABLE_LEN (sizeof(HEATER_0_TEMPTABLE)/sizeof(*HEATER_0_TEMPTABLE))
 #else
-#ifdef HEATER_0_USES_THERMISTOR
-  #error No heater 0 thermistor table specified
-#else  // HEATER_0_USES_THERMISTOR
-  #define heater_0_temptable 0
-  #define heater_0_temptable_len 0
-#endif // HEATER_0_USES_THERMISTOR
+# ifdef HEATER_0_USES_THERMISTOR
+#  error No heater 0 thermistor table specified
+# else  // HEATER_0_USES_THERMISTOR
+#  define HEATER_0_TEMPTABLE NULL
+#  define HEATER_0_TEMPTABLE_LEN 0
+# endif // HEATER_0_USES_THERMISTOR
+#endif
+
+//Set the high and low raw values for the heater, this indicates which raw value is a high or low temperature
+#ifndef HEATER_0_RAW_HI_TEMP
+# ifdef HEATER_0_USES_THERMISTOR   //In case of a thermistor the highest temperature results in the lowest ADC value
+#  define HEATER_0_RAW_HI_TEMP 0
+#  define HEATER_0_RAW_LO_TEMP 16383
+# else                          //In case of an thermocouple the highest temperature results in the highest ADC value
+#  define HEATER_0_RAW_HI_TEMP 16383
+#  define HEATER_0_RAW_LO_TEMP 0
+# endif
 #endif
 
 #ifdef THERMISTORHEATER_1
-  #define heater_1_temptable TT_NAME(THERMISTORHEATER_1)
-  #define heater_1_temptable_len (sizeof(heater_1_temptable)/sizeof(*heater_1_temptable))
+# define HEATER_1_TEMPTABLE TT_NAME(THERMISTORHEATER_1)
+# define HEATER_1_TEMPTABLE_LEN (sizeof(HEATER_1_TEMPTABLE)/sizeof(*HEATER_1_TEMPTABLE))
 #else
-#ifdef HEATER_1_USES_THERMISTOR
-  #error No heater 1 thermistor table specified
-#else  // HEATER_1_USES_THERMISTOR
-  #define heater_1_temptable 0
-  #define heater_1_temptable_len 0
-#endif // HEATER_1_USES_THERMISTOR
+# ifdef HEATER_1_USES_THERMISTOR
+#  error No heater 1 thermistor table specified
+# else  // HEATER_1_USES_THERMISTOR
+#  define HEATER_1_TEMPTABLE NULL
+#  define HEATER_1_TEMPTABLE_LEN 0
+# endif // HEATER_1_USES_THERMISTOR
+#endif
+
+//Set the high and low raw values for the heater, this indicates which raw value is a high or low temperature
+#ifndef HEATER_1_RAW_HI_TEMP
+# ifdef HEATER_1_USES_THERMISTOR   //In case of a thermistor the highest temperature results in the lowest ADC value
+#  define HEATER_1_RAW_HI_TEMP 0
+#  define HEATER_1_RAW_LO_TEMP 16383
+# else                          //In case of an thermocouple the highest temperature results in the highest ADC value
+#  define HEATER_1_RAW_HI_TEMP 16383
+#  define HEATER_1_RAW_LO_TEMP 0
+# endif
 #endif
 
 #ifdef THERMISTORHEATER_2
-  #define heater_2_temptable TT_NAME(THERMISTORHEATER_2)
-  #define heater_2_temptable_len (sizeof(heater_2_temptable)/sizeof(*heater_2_temptable))
+# define HEATER_2_TEMPTABLE TT_NAME(THERMISTORHEATER_2)
+# define HEATER_2_TEMPTABLE_LEN (sizeof(HEATER_2_TEMPTABLE)/sizeof(*HEATER_2_TEMPTABLE))
 #else
-#ifdef HEATER_2_USES_THERMISTOR
-  #error No heater 2 thermistor table specified
-#else  // HEATER_2_USES_THERMISTOR
-  #define heater_2_temptable 0
-  #define heater_2_temptable_len 0
-#endif // HEATER_2_USES_THERMISTOR
+# ifdef HEATER_2_USES_THERMISTOR
+#  error No heater 2 thermistor table specified
+# else  // HEATER_2_USES_THERMISTOR
+#  define HEATER_2_TEMPTABLE NULL
+#  define HEATER_2_TEMPTABLE_LEN 0
+# endif // HEATER_2_USES_THERMISTOR
+#endif
+
+//Set the high and low raw values for the heater, this indicates which raw value is a high or low temperature
+#ifndef HEATER_2_RAW_HI_TEMP
+# ifdef HEATER_2_USES_THERMISTOR   //In case of a thermistor the highest temperature results in the lowest ADC value
+#  define HEATER_2_RAW_HI_TEMP 0
+#  define HEATER_2_RAW_LO_TEMP 16383
+# else                          //In case of an thermocouple the highest temperature results in the highest ADC value
+#  define HEATER_2_RAW_HI_TEMP 16383
+#  define HEATER_2_RAW_LO_TEMP 0
+# endif
 #endif
 
 #ifdef THERMISTORBED
-  #define bedtemptable TT_NAME(THERMISTORBED)
-  #define bedtemptable_len (sizeof(bedtemptable)/sizeof(*bedtemptable))
+# define BEDTEMPTABLE TT_NAME(THERMISTORBED)
+# define BEDTEMPTABLE_LEN (sizeof(BEDTEMPTABLE)/sizeof(*BEDTEMPTABLE))
 #else
-#ifdef BED_USES_THERMISTOR
-  #error No bed thermistor table specified
-#endif // BED_USES_THERMISTOR
+# ifdef BED_USES_THERMISTOR
+#  error No bed thermistor table specified
+# endif // BED_USES_THERMISTOR
+#endif
+
+//Set the high and low raw values for the heater, this indicates which raw value is a high or low temperature
+#ifndef HEATER_BED_RAW_HI_TEMP
+# ifdef BED_USES_THERMISTOR   //In case of a thermistor the highest temperature results in the lowest ADC value
+#  define HEATER_BED_RAW_HI_TEMP 0
+#  define HEATER_BED_RAW_LO_TEMP 16383
+# else                          //In case of an thermocouple the highest temperature results in the highest ADC value
+#  define HEATER_BED_RAW_HI_TEMP 16383
+#  define HEATER_BED_RAW_LO_TEMP 0
+# endif
 #endif
 
 #endif //THERMISTORTABLES_H_
-
